@@ -1,0 +1,10 @@
+node_modules
+.vscode
+dist
+tmp/*
+!tmp/.gitkeep
+coverage
+digitalocean
+digitalocean.pub
+.env
+.DS_Store

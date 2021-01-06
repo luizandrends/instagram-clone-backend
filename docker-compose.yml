@@ -1,0 +1,28 @@
+version: '3.7'
+
+volumes:
+  data:
+services:
+  pgsql:
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      USERNAME: postgres
+      POSTGRES_DB: instaclone
+      POSTGRES_PASSWORD: instaclone
+  backend:
+    build:
+      context: .
+      args:
+        uid: ${UID}
+    env_file:
+      - .env
+    volumes:
+      - '.:/app'
+    ports:
+      - '9229:9229'
+      - '3333:3333'
+    links:
+      - pgsql
+    command: sh -c "yarn install && yarn dev:server"
